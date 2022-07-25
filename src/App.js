@@ -1,67 +1,68 @@
-import { useState } from "react";
-import { Route, Routes } from "react-router";
-import { Link } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import ProductsPage from "./pages/Products/ProductsPage";
-import ViewProductPage from "./pages/ViewProduct/ViewProductPage";
-import "./styles.css";
+import { useState } from 'react';
+import { Route, Routes } from 'react-router';
+import { Link } from 'react-router-dom';
+import Home from './pages/Home/Home';
+import ProductsPage from './pages/Products/ProductsPage';
+import ViewProductPage from './pages/ViewProduct/ViewProductPage';
+import EditProduct from './pages/EditProduct/EditProduct';
+import './styles.css';
 
 const productsData = [
   {
     id: 1,
-    name: "iMac",
-    type: "computer",
+    name: 'iMac',
+    type: 'computer',
     price: 1400,
     inventory: {
       quantity: 100,
-      incomingDelivery: false
-    }
+      incomingDelivery: false,
+    },
   },
   {
     id: 2,
-    name: "Macbook Pro",
-    type: "computer",
+    name: 'Macbook Pro',
+    type: 'computer',
     price: 2000,
     inventory: {
       quantity: 10,
-      incomingDelivery: true
-    }
+      incomingDelivery: true,
+    },
   },
   {
     id: 3,
-    name: "iPad Mini",
-    type: "tablet",
+    name: 'iPad Mini',
+    type: 'tablet',
     price: 600,
     inventory: {
       quantity: 200,
-      incomingDelivery: false
-    }
+      incomingDelivery: false,
+    },
   },
   {
     id: 4,
-    name: "iPad Pro",
-    type: "tablet",
+    name: 'iPad Pro',
+    type: 'tablet',
     price: 800,
     inventory: {
       quantity: 0,
-      incomingDelivery: true
-    }
-  }
+      incomingDelivery: true,
+    },
+  },
 ];
 
 const appsData = [
   {
     id: 1,
-    name: "Farmville",
-    type: "game",
-    price: 0
+    name: 'Farmville',
+    type: 'game',
+    price: 0,
   },
   {
     id: 2,
-    name: "Facebook",
-    type: "social",
-    price: 0
-  }
+    name: 'Facebook',
+    type: 'social',
+    price: 0,
+  },
 ];
 
 export default function App() {
@@ -86,13 +87,15 @@ export default function App() {
         </nav>
       </header>
       <Routes>
-        {/* 
-          TODO: add your route for editing a product here. The 
-          Route should be /products/:id/edit and it should use
-          the EditProduct element
-        */}
+        <Route
+          path="/products/:id/edit"
+          element={<EditProduct setProducts={setProducts} />}
+        />
         <Route path="/products/:id" element={<ViewProductPage />} />
-        <Route path="/products" element={<ProductsPage products={products} />}/>
+        <Route
+          path="/products"
+          element={<ProductsPage products={products} />}
+        />
         <Route path="/" element={<Home />} />
       </Routes>
     </div>

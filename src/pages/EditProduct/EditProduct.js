@@ -1,14 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 
-function EditProductPage(props) {
-
+function EditProductPage({ setProducts }) {
+  console.log('properteiss', useLocation());
   const [productToUpdate, setProductToUpdate] = useState(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    setProductToUpdate(location.state.product);
+  }, [location]);
 
   console.log({ productToUpdate });
 
   //TODO: Write code to set the productToUpdateState
-  //with the product data from the location. 
-  // 
+  //with the product data from the location.
+  //
   //Use useEffect so that when the location changes
   //you get the product data from the location. See
   //ViewProductPage.js to check
@@ -22,6 +28,11 @@ function EditProductPage(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    setProducts((currProducts) =>
+      currProducts.map((product) =>
+        product.id === productToUpdate.id ? productToUpdate : product
+      )
+    );
   }
 
   if (!productToUpdate) return <div>Loading...</div>;
